@@ -1,0 +1,279 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'MozTTLight', Verdana, sans-serif; padding: 0; margin: 0;
+}
+
+img { border: none; }
+
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -2em;
+}
+
+footer, .push {
+    height: 3em;
+}
+
+h1 {
+    font: 1.8rem/2.5rem "Open Sans",Sans-serif
+}
+
+#historial, #opcions { display: none; }
+
+header {
+background: #D10E08;
+background: linear-gradient(to bottom, #D10E08 0%, #941413 100%) repeat scroll 0 0 transparent; /* standard */
+background: -webkit-gradient(linear, center top, center bottom, from(#D10E08), to(#941413)); /* for webkit browsers */
+background: -moz-linear-gradient(center top , #D10E08, #941413) repeat scroll 0 0 transparent;
+background: -ms-linear-gradient(#D10E08, #941413);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#D10E08', endColorstr='#941413');
+zoom: 1;
+width:100%;
+height: 2.5em;
+padding: 0.5em 0;
+}
+
+header h1 {
+    margin: 0 auto;
+    text-align: center;
+    color: #ffffff;
+    width: 60%;
+    float: left;
+}
+
+.header-left {
+  float: left;
+  left: 0;
+  top: 0;
+  width: 20%;
+  height: 100%;
+}
+
+.header-right {
+    float: right;
+    width: 20%;
+    height: 100%;
+}
+
+header button, button.translate { 
+    border: 0px;
+    color: transparent;
+    vertical-align: middle;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+}
+
+.header-right button {
+    float: right;
+}
+
+button.settings-show { margin-left: 1em; background: transparent url(../style/images/settings.png) no-repeat center left; }
+
+button.history-show { margin-right: 1em; background: transparent url(../style/images/history.png) no-repeat center right; }
+
+button.clean-all { margin-right: 1em; background: transparent url(../style/images/trash.png) no-repeat center right; }
+
+button.main-show { margin-left: 1em; background: transparent url(../style/images/back.png) no-repeat center left; }
+
+button.translate { background: transparent url(../style/images/translate.png) no-repeat center center;
+    float: right;
+    border: 1px solid grey;
+    -moz-border-radius: 7%;
+    -webkit-border-radius: 7%;
+    border-radius: 7%;
+    width: 40px;
+    height: 40px;
+}
+
+button.translate:focus {
+    background-color: grey;
+}
+
+button.translate:active {
+    background-color: #D10E08;
+}
+
+.contents { width: 95%; margin: 1em auto 2em;  }
+
+#up {
+    color: transparent;
+    background: transparent url(../style/images/up.png) no-repeat center center;
+    border: 0;
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+}
+
+footer {
+    background: none repeat scroll 0 0 #E5E3D8;
+    color: #000000;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 0.9em;
+    margin-top: 1.5em;
+    padding: 0 0 4.5em;
+    text-align: center;
+    width: 100%;
+    clear: both;
+}
+
+footer p {
+	padding-top: 0.7em;
+}
+
+footer p img {
+	vertical-align: bottom;
+	padding-right: 1em;
+}
+
+/** Traductor **/
+#main { width: 95%; margin: 0 auto; }
+#area, #inter {clear:left;}
+#langpairdiv { height: 3em; margin-top: 1em; }
+#langpairdiv input, #langpairdiv select { display: block; }
+#langpairdiv-center { width: 80%;  float: left;  }
+#langpairdiv-center select { width: 100%; height: 2.5em; margin: 0 auto; }
+#langpairdiv-right { width:20%; float: right; }
+#langpairdiv-right input { text-align: right;  margin: 0 0 0 auto; padding-right: 1em; height: 2.5em; }
+
+textarea {margin: 0 auto; display:block; font-size: 1.2em; clear: both; width: 100%; }
+
+#dv_traduccio { margin: 2em auto 2em; display:block; width:100%; }
+
+.navtrad {
+    margin-bottom: 0.5em;
+    width:100%;
+    float: left;
+}
+
+.navtrad h3 {
+    margin: 0 auto;
+    text-align: center;
+    width: 60%;
+    float: left;
+}
+
+.navtrad .button-up {
+  float: left;
+  left: 0;
+  top: 0;
+  width: 20%;
+  height: 100%;
+}
+
+.navtrad .button-clear {
+    float: right;
+    width: 20%;
+    height: 100%;
+}
+
+.navtrad .button-clear button {
+    float: right;
+}
+
+
+
+#ad {width:240px; margin: 15px auto 10px; display:none; text-align:center;}
+
+
+.link_select {
+    font-size:0.8em;
+    padding-top:10px;
+    color:#666;
+    text-align:center;
+    margin:5px;
+}
+#dv_traduccio input {font-size:110%; padding: 5px;}
+.link_select span {
+    cursor:pointer;
+}
+
+
+
+.controls {width:100%; margin-bottom: 15px;}
+.controls a{color: #656565;}
+.histitem {clear:both; padding: 10px 0px;}
+.histitem .txt {padding-left: 15px;}
+.select {float:left;}
+.select img { width:30px; vertical-align: bottom; }
+a.select {text-decoration: none; color: #656565; float:none;}
+.remove {float:right; margin-right: 0.3em; height:30px; }
+.remove img { vertical-align: bottom; }
+
+#plataformes, #install {
+    border-top: 1px solid #DDE2CC;
+    float: left;
+    margin-top: 35px;
+    padding-top: 25px;
+    width: 100%;
+}
+
+
+#logos {margin: 30px auto 10px; width:95%; float:left; border-top: 1px dotted #B4B1A2; padding: 15px;}
+#logos div {margin: 0 auto; width:100%; float:left;}
+#logos .icon, #plataformes .icon {text-align:center; width:50%;}
+#logos .left, #plataformes .left {float:left;}
+#logos .right, #plataformes .right {float:right;}
+#logos .icon a, #plataformes .icon a {text-decoration:none;}
+#logos .icon img {min-width:120px; max-width:135px;text-align:center; border:none; padding: 5px; margin-left: auto; margin-right: auto;}
+#plataformes .icon img {min-width:80px; max-width:100px;text-align:center; border:none; padding: 5px; margin-left: auto; margin-right: auto;}
+#warninternet {display:none; text-align: center; margin: 20px auto; font-size: 110%; color: red; font-weight: bold; float: left; width: 100%;}
+
+input[type=checkbox] {
+display:none;
+}
+ 
+input[type=checkbox] + label
+{
+background: transparent url(../style/images/unchecked.png); 
+height: 24px;
+width: 24px;
+float: left;
+margin-left: 0.5em;
+display:inline-block;
+}
+input[type=checkbox]:checked + label
+{
+background: transparent url(../style/images/checked.png); 
+height: 24px;
+width: 24px;
+float: left;
+margin-left: 0.5em;
+display:inline-block;
+}
+
+.unknown span { padding-left: 1em; }
+
+#install-btn {
+    background: linear-gradient(to bottom, #0088CC 0%, #0055CC 100%) repeat scroll 0 0 transparent;
+    color: white;
+    display: block;
+    font-size: 120%;
+    line-height: 1.2em;
+    margin: 1em auto;
+    max-width: 80%;
+    padding: 0.5em;
+    text-align: center;
+    width: 10em;
+}
+
+#update-btn {
+    background: linear-gradient(to bottom, #0088CC 0%, #0055CC 100%) repeat scroll 0 0 transparent;
+    color: white;
+    display: block;
+    font-size: 100%;
+    line-height: 1.1em;
+    margin: 1em auto;
+    max-width: 80%;
+    padding: 0.3em;
+    text-align: center;
+    width: 10em;
+}

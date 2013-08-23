@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="keywords" content="traductor automàtic, traductor català, traductor valencià, traductor espanyol, traductor castellà, catalan translator, valencian translator, traductor anglès, traductor francès, traductor portuguès" />
+        <meta name="MobileOptimized" content="width" />
+        <meta name="HandheldFriendly" content="true" />
+        <title>Traductor de Softcatalà</title>
+        <link rel="stylesheet" type="text/css" href="style/traductor.css" />
+	<link rel="image_src" href="style/images/softcatala.png" />
+	<link rel="resource" type="application/l10n" href="l10n/data.ini" />
+	<meta property="og:image" content="style/images/noticies/softcatala.png" />
+    </head>
+<body>
+<!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-150131-4']);
+  _gaq.push(['_setDomainName', 'www.softcatala.org']);
+  _gaq.push(['_trackPageview', '/m/traductor']);
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 
+        'http://www') + '.google-analytics.com/ga.js';
+    ga.setAttribute('async', 'true');
+    document.documentElement.firstChild.appendChild(ga);
+  })();
+</script>
+<section id="traductor">
+    <header id="main-header">
+    <div class="header-left">
+	<button class="settings-show">
+	    <span data-l10n-id="options" class="icon icon-settings" >Settings</span>
+	</button>
+    </div>
+    <h1 data-l10n-id="header">Translator</h1>
+    <div class="header-right">
+	<button class="history-show">
+	  <span data-l10n-id="history" class="icon icon-history" >History</span>
+	</button>
+    </div>
+    </header>
+    <div class="contents">
+	<form id="ftraductor" action="#">
+	<div id="langpairdiv">
+	    <div id="langpairdiv-center">
+	       <select id="langpair">
+		  <option value="es-ca" selected="selected">es-ca</option>
+		  <option value="ca-es">ca-es</option>
+	      </select>
+	    </div>
+	    <div id="langpairdiv-right">
+		<button class="translate">
+		    <span data-l10n-id="translate" class="icon icon-translate" >Translate</span>
+		</button>
+	    </div>
+	</div>
+	<div id="warninternet"></div>
+	<div id="area">
+	<textarea maxlength="4000" name="sl" rows="6" cols="40" id="sl"></textarea>
+	</div>
+	</form>
+	<div class="ad" id="ad">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-5137971297629213";
+/* Ad_traductor_mobile */
+google_ad_slot = "1542615118";
+google_ad_width = 234;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+        </div>
+	<div id="dv_traduccio" style="display: none;">
+	    <div class="navtrad">
+		<div class="button-up"><a href="#" id="up">Up</a></div>
+		<h3 data-l10n-id="translation">Translation</h3>
+		<div class="button-clear"><button id="neteja">Clear</button></div>
+	    </div>
+	    <textarea id="traduccio" rows="6" cols="40" ></textarea>
+	</div>
+    </div>
+</section>
+<section id="historial">
+    <header>
+    <div class="header-left"><button class="main-show">Back</button></div>
+    <h1 data-l10n-id="history">History</h1>
+    <div class="header-right">
+	<button class="clean-all">
+	  <span data-l10n-id="clean_all" class="icon icon-trash" >Clean all</span>
+	</button>
+    </div>
+    </header>
+    <div class="contents">
+	<div class="list"></div>
+    </div>
+</section>
+<section id="opcions">
+    <header>
+    <div class="header-left"><button class="main-show">Back</button></div>
+    <h1 data-l10n-id="options">Options</h1>
+    <div class="header-right">
+    </div>
+    </header>
+    <div class="contents">
+        <p class="unknown"><input type="checkbox" checked="checked" name="unkwown" id="unknown" /><label for="unknown"></label><span data-l10n-id="unknown">Mark unknown words</span></p>
+	<form id="install"><button id="install-btn" data-l10n-id="install">Install as webapp</button></form>
+	<div id="plataformes">
+	    <h3 data-l10n-id="platforms">Other platforms</h3>
+	    <div class="icon left">
+		<a target="_blank" href="http://baixades.softcatala.org/?url=https%3A%2F%2Fmarket.android.com%2Fdetails%3Fid%3Dorg.softcatala.traductor&amp;id=5353&amp;mirall=traductorm&amp;extern=1&amp;versio=0.1&amp;so=and"><img src="/img/android_logo.png" alt="Android" class="bzero"></a></div>
+	    <div class="icon right">
+		<a target="_blank" href="http://baixades.softcatala.org/?url=http%3A%2F%2Fitunes.apple.com%2Fmd%2Fapp%2Ftraductor-softcatala%2Fid447196146%3Fmt%3D8&amp;id=5353&amp;mirall=traductorm&amp;extern=1&amp;versio=0.1&amp;so=ios"><img src="/img/iphone_logo.jpg" alt="iPhone" class="bzero"></a>
+	    </div></div>
+	    <div id="logos">
+		<h3 data-l10n-id="acknowledgements">Acknowledgements</h3>
+	    <div>
+		<div class="icon left">
+		    <a target="_blank" href="http://www.ua.es"><img class="bzero" alt="Universitat d'Alacant" src="/img/logo_unialacant.jpg" /></a>
+		</div>
+		<div class="icon right">
+		    <a target="_blank" href="http://transducens.dlsi.ua.es"><img class="bzero" alt="Grup Transducens" src="/img/transducens.png" /></a>
+		</div>
+	    </div>
+	    <div>
+		<div class="icon left">
+		    <a target="_blank" href="http://www.dlsi.ua.es/"><img class="bzero" alt="Departament de LLenguatges Informàtics" src="/img/logo_depinformatic.jpg" /></a>
+		</div>
+		<div class="icon right">
+		    <a target="_blank" href="http://www.prompsit.com"><img class="bzero" alt="Prompsit" src="/img/prompsit.png" /></a>
+		</div>
+	    </div>
+	</div>
+    </div>
+</section>
+<div class="push"></div>
+<footer>
+    <p><a target="_blank" href="http://www.softcatala.org"><img src="/img/icons/softcatala-16.png" /></a></a><a target="_blank" href="http://www.softcatala.org">Softcatalà</a> &copy; 1998-2013 </p>
+    <p class="versioord"><a target="_blank" href="http://www.softcatala.org/traductor?mobile_no_redirect=1" data-l10n-id="desktop">Desktop version</a></p>
+</footer>
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<![endif]-->
+        <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+<!--
+	<script type="text/javascript" src="js/pouchdb.js"></script>
+	<script type="text/javascript" src="js/l10n.js"></script>
+        <script type="text/javascript" src="js/traductor.js"></script>
+-->
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.softcatala.cat/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", "6"]);
+    var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+    g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Piwik Code --> 
+</body>
+</html>
