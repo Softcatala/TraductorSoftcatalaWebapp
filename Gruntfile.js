@@ -77,7 +77,12 @@ module.exports = function(grunt) {
 			prod: {
 				expand: true, cwd: 'out/', src: ['**'], dest: site				
 			}
-		}
+		},
+                clean: {
+                        dev: ['build'],
+                        prod: ['out'],
+                        all: ['build', 'out']
+                }
 	});
 	
 	// Load the plugin that provides the "uglify" task.
@@ -87,12 +92,14 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-targethtml');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-manifest');
-        
-	grunt.registerTask('default', ['jshint', 'copy:dev', 'targethtml:dev']);
-	grunt.registerTask('dev', ['jshint', 'copy:dev', 'targethtml:dev']);
-	grunt.registerTask('prod', ['jshint', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest']);
-	grunt.registerTask('sitedev', ['jshint', 'copy:dev', 'targethtml:dev', 'copy:sitedev']);
-	grunt.registerTask('siteprod', ['jshint', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest', 'copy:prod']);
+        grunt.loadNpmTasks('grunt-contrib-clean');
+
+	grunt.registerTask('default', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev']);
+	grunt.registerTask('dev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev']);
+	grunt.registerTask('prod', ['jshint', 'clean:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest']);
+	grunt.registerTask('sitedev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev', 'copy:sitedev']);
+	grunt.registerTask('siteprod', ['jshint', 'clean:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest', 'copy:prod']);
+        grunt.registerTask('clear', ['clean:all']);
 
 	grunt.registerTask('check', ['jshint']);
 
