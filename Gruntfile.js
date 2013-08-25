@@ -49,7 +49,6 @@ module.exports = function(grunt) {
 			generate: {
 				options: {
 					basePath: 'out',
-					cache: [ 'js/app.js' ],
 					network: ['*', 'http://*', 'https://*'],
 					verbose: true,
 					timestamp: true,
@@ -57,9 +56,13 @@ module.exports = function(grunt) {
 					master: ['index.html']
 				},
 				src: [
-					'out/index.html',
-					'out/js/*.js',
-					'out/style/*.css'
+					'index.html',
+					'favicon.ico',
+					'js/*.js',
+					'js/libs/*js',
+					'style/*.css',
+					'style/images/*',
+					'l10n/*'
 				],
 				dest: 'out/manifest.appcache'
 			}
@@ -72,7 +75,7 @@ module.exports = function(grunt) {
 				expand: true, cwd: 'build/', src: ['**'], dest: site
 			},
 			extra: {
-				expand: true, cwd: 'src/', src: ['js/libs/jquery-1.9.1.min.js', 'js/libs/html5shiv.js', 'favicon.ico', 'l10n', 'style'], dest: 'out'
+				expand: true, cwd: 'src/', src: ['js/libs/jquery-1.9.1.min.js', 'js/libs/html5shiv.js', 'favicon.ico', 'l10n/*', 'style/**'], dest: 'out'
 			},	
 			prod: {
 				expand: true, cwd: 'out/', src: ['**'], dest: site				
