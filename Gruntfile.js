@@ -97,8 +97,8 @@ module.exports = function(grunt) {
         grunt.loadNpmTasks('grunt-manifest');
         grunt.loadNpmTasks('grunt-contrib-clean');
 
-	grunt.registerTask('default', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev']);
 	grunt.registerTask('dev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev']);
+	grunt.registerTask('default', 'dev');
 	grunt.registerTask('prod', ['jshint', 'clean:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest']);
 	grunt.registerTask('sitedev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev', 'copy:sitedev']);
 	grunt.registerTask('siteprod', ['jshint', 'clean:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest', 'copy:prod']);
