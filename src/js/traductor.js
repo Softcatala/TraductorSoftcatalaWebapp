@@ -739,7 +739,7 @@ function getAllItemsID(callback, db, docSet) {
 						
 						for (var row in response.rows) {
 							// We handle row parsing in function below
-							dbh.get(response.rows.row.id, responseRows(err, docArr, IDSaved));
+							dbh.get(response.rows[row].id, responseRows(err, docArr, IDSaved));
 						}
 					}
 				});
