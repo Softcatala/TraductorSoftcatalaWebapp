@@ -1,5 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!--(if target dev)><!-->
+<html>
+<!--<!(endif)--><!--(if target prod)><!-->
 <html manifest="manifest.appcache">
+<!--<!(endif)-->
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width">
@@ -15,6 +18,7 @@
 	<meta property="og:image" content="style/images/noticies/softcatala.png" />
     </head>
 <body>
+<!--(if target prod)><!-->
 <!-- Google Analytics -->
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -29,6 +33,7 @@
     document.documentElement.firstChild.appendChild(ga);
   })();
 </script>
+<!--<!(endif)-->
 <section id="traductor">
     <header id="main-header">
     <div class="header-left">
@@ -64,6 +69,7 @@
 	</div>
 	</form>
 	<div class="ad" id="ad">
+<!--(if target prod)><!-->
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-5137971297629213";
 /* Ad_traductor_mobile */
@@ -75,6 +81,7 @@ google_ad_height = 60;
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
+<!--<!(endif)-->
         </div>
 	<div id="dv_traduccio" style="display: none;">
 	    <div class="navtrad">
@@ -153,6 +160,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	<script type="text/javascript" src="js/l10n.js"></script>
         <script type="text/javascript" src="js/traductor.js"></script>
 -->
+<!--(if target prod)><!-->
 <!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
@@ -168,5 +176,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   })();
 </script>
 <!-- End Piwik Code --> 
+<!--<!(endif)-->
 </body>
 </html>

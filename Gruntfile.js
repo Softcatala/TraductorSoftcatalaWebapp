@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 
-	var site = grunt.option('site') || '/var/www/dev-traductor.softcatala.org';
+	var site = grunt.option('site') || '/var/www/dev-traductor/htdocs';
 	console.log(site);
 	
 	grunt.initConfig({
@@ -11,18 +11,18 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				src: ['src/js/*.js'],
-				dest: 'build/js/main.js'
+				dest: 'build/js/app.js'
 			}
 		},
 		uglify: {
 			dev: {
 				files: {
-					'build/js/main.min.js': ['<%= concat.dist.dest %>']
+					'build/js/app.min.js': ['<%= concat.dist.dest %>']
 				}
 			},
 			prod: {
 				files: {
-					'out/js/main.min.js': ['<%= concat.dist.dest %>']
+					'out/js/app.min.js': ['<%= concat.dist.dest %>']
 				}
 			}
 		},
