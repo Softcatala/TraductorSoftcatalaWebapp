@@ -9,8 +9,12 @@ module.exports = function(grunt) {
 			options: {
 				separator: ';'
 			},
+			dev: {
+				src: ['src/js/libs/pouchdb.js', 'src/js/libs/l10n.js', 'src/js/traductor.js'],
+				dest: 'build/js/app.js'				
+			},
 			prod: {
-				src: ['src/js/libs/pouchdb.js', 'src/js/libs/l10n.js', 'src/js/libs/traductor.js'],
+				src: ['src/js/libs/pouchdb.js', 'src/js/libs/l10n.js', 'src/js/traductor.js'],
 				dest: 'out/js/app.js'
 			}
 		},
@@ -36,6 +40,8 @@ module.exports = function(grunt) {
 		jshint: {
 			files: ['Gruntfile.js', 'src/js/*.js'],
 			options: {
+				// Ignore
+				'-W069': true,
 				// options here to override JSHint defaults
 				globals: {
 					jQuery: true,
@@ -100,8 +106,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('dev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev']);
 	grunt.registerTask('default', 'dev');
 	grunt.registerTask('prod', ['jshint', 'clean:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest']);
-	grunt.registerTask('sitedev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev', 'copy:sitedev']);
-	grunt.registerTask('siteprod', ['jshint', 'clean:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest', 'copy:prod']);
+	grunt.registerTask('sitedev', ['dev', 'copy:sitedev']);
+	grunt.registerTask('siteprod', ['prod', 'copy:prod']);
         grunt.registerTask('clear', ['clean:all']);
 
 	grunt.registerTask('check', ['jshint']);

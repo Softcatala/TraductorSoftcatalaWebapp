@@ -32,7 +32,6 @@ $(document).ready(function() {
 	migrateStorage("trada");
 });
 
-
 jQuery.fn.limitMaxlength = function(options){
 
 	var settings = jQuery.extend({
@@ -92,6 +91,7 @@ function nl2br(text){
 
 setTimeout(avisSoftvalencia,10000);
 document.apertium_loaded = false;
+
 function avisSoftvalencia() {
 
 	avis = 'Estem experimentant problemes tècnics.<br />Proveu d\'utilitzar <a href="http://www.softvalencia.org/traductor/">el traductor disponible a la web de Softvalencià</a> mentre els resolem.';
@@ -116,45 +116,44 @@ jQuery(document).ready(function() {
 		getLocalStorage(DBname);
 	}
 
-	jQuery(document).on("click", "button.translate", function(){
-			var langpair = jQuery('#langpair option:selected').val().replace('-','|');
+	jQuery(document).on("click", "button.translate", function() {
+		var langpair = jQuery('#langpair option:selected').val().replace('-','|');
 
-			var muk = (jQuery('#unknown:checked').length)?'yes':'no';
+		var muk = (jQuery('#unknown:checked').length)?'yes':'no';
 
-			var txt = jQuery('#sl').val();
+		var txt = jQuery('#sl').val();
 
-			if(!txt.length) return false;
-			
-			// Let's clear translated text
+		if(!txt.length) return false;
+		
+		// Let's clear translated text
 
-			var checkurl = "http://www.softcatala.org/app/online.php";
-                        $.ajax({
-                                url:checkurl,
-                                type:"GET",
-                                dataType:"jsonp",
-                                crossDomain: "true",
-                                timeout:2000,
-                                async:true,
-                                success:function(data, status){
-					$.ajax({
-                                                url:apertium_url+"/json/translate", //URL of translator
-                                                type:"POST",
-                                                crossDomain: "true",
-                                                timeout:2000,
-                                                async:true,
-                                                data : {'langpair':langpair,'q':txt,'markUnknown':muk,'key': api_key, callback:'trans'},
-                                                dataType: 'jsonp',
-                                                success : trad_ok,
-                                                failure : trad_ko
-                                        });
-                                },
-                                error:function(x, t, m){
-					parells_ko();
-				}
-                        });
+		var checkurl = "http://www.softcatala.org/app/online.php";
+		$.ajax({
+			url:checkurl,
+			type:"GET",
+			dataType:"jsonp",
+			crossDomain: "true",
+			timeout:2000,
+			async:true,
+			success:function(data, status){
+				$.ajax({
+					url:apertium_url+"/json/translate", //URL of translator
+					type:"POST",
+					crossDomain: "true",
+					timeout:2000,
+					async:true,
+					data : {'langpair':langpair,'q':txt,'markUnknown':muk,'key': api_key, callback:'trans'},
+					dataType: 'jsonp',
+					success : trad_ok,
+					failure : trad_ko
+				});
+			},
+			error:function(x, t, m) {
+				parells_ko();
+			}
+		});
 
-
-			return false;
+		return false;
 	});
 
 	jQuery('#form_proposta').submit(function(){
@@ -219,11 +218,11 @@ jQuery(document).ready(function() {
 			//Store locally last langpair
 			
 			var docSet = [];
-			docSet.id = msec;
-			docSet.langpair = langpair;
-			docSet.unknown = unknown;
-			docSet.txt = txt;
-			docSet.traduccio = traduccio;
+			docSet['id'] = msec;
+			docSet['langpair'] = langpair;
+			docSet['unknown'] = unknown;
+			docSet['txt'] = txt;
+			docSet['traduccio'] = traduccio;
 
 			storeDoc( DBname, docSet );
 		
@@ -259,6 +258,7 @@ jQuery(document).ready(function() {
 });
 
 jQuery(document).on('click', ".select", function() {
+	
 	var splitkey = jQuery(this).attr('id').split('-', 2);
 	var doc = splitkey[1];
 	
@@ -267,60 +267,61 @@ jQuery(document).on('click', ".select", function() {
 		getAllItemsID(function (docSet) {
 			
 			//Put used params
-			if (docSet.langpair !== '') {
-				jQuery('#langpair').val(docSet.langpair);
+			if (docSet['langpair'] !== '') {
+				jQuery('#langpair').val(docSet['langpair']);
 			}
 			
 			// Default true
-			if (docSet.unknown == 'false') {
+			if (docSet['unknown'] == 'false') {
 				jQuery('#unknown').attr('checked', false);
 			} else {
 				jQuery('#unknown').attr('checked', true);
 			}
 			
-			if (docSet.txt !== '') {
-				jQuery('#sl').val(docSet.txt);
+			if (docSet['txt'] !== '') {
+				jQuery('#sl').val(docSet['txt']);
 			}
-			if (docSet.traduccio !== '') {
-				jQuery('#traduccio').html(docSet.traduccio);
-				jQuery('#traduccio').val(docSet.traduccio);
+			if (docSet['traduccio'] !== '') {
+				jQuery('#traduccio').html(docSet['traduccio']);
+				jQuery('#traduccio').val(docSet['traduccio']);
 				$("section").hide();
 				jQuery('#trad_info').html('');
 				$("#traductor").show();
 				//jQuery('#traduccio').show();
 				jQuery('#dv_traduccio').show(500);
 			}
-			
+	
 		}, DBname, doc);
 		
 	} else {
 	
-		var docSet = getAllItems(DBname, doc);
+	var docSet = getAllItems(DBname, doc);
 		
 		//Put used params
-		if (docSet.langpair !== '') {
-			jQuery('#langpair').val(docSet.langpair);
+		if (docSet['langpair'] !== '') {
+			jQuery('#langpair').val(docSet['langpair']);
 		}
 		
 		// Default true
-		if (docSet.unknown == 'false') {
+		if (docSet['unknown'] == 'false') {
 			jQuery('#unknown').attr('checked', false);
 		} else {
 			jQuery('#unknown').attr('checked', true);
 		}
 		
-		if (docSet.txt !== '') {
-			jQuery('#sl').val(docSet.txt);
+		if (docSet['txt'] !== '') {
+			jQuery('#sl').val(docSet['txt']);
 		}
-		if (docSet.traduccio !== '') {
-			jQuery('#traduccio').html(docSet.traduccio);
-			jQuery('#traduccio').val(docSet.traduccio);
+		if (docSet['traduccio'] !== '') {
+			jQuery('#traduccio').html(docSet['traduccio']);
+			jQuery('#traduccio').val(docSet['traduccio']);
 			$("section").hide();
 			jQuery('#trad_info').html('');
 			$("#traductor").show();
 			//jQuery('#traduccio').show();
 			jQuery('#dv_traduccio').show(500);
 		}
+	
 	}
 });
 
@@ -397,8 +398,8 @@ function sortObj(arr){
 	sortedKeys.sort();
 
 	// Reconstruct sorted obj based on keys
-	for (var h in sortedKeys){
-		sortedObj[sortedKeys[h]] = arr[sortedKeys[h]];
+	for (var y in sortedKeys){
+		sortedObj[sortedKeys[y]] = arr[sortedKeys[y]];
 	}
 	return sortedObj;
 }
@@ -414,11 +415,11 @@ function getLocalStorage(db) {
 
 	//Put last used language
 	if (lastSaved) {
-		if (lastSaved.langpair) {
-			jQuery('#langpair').val(lastSaved.langpair);
+		if (lastSaved['langpair']) {
+			jQuery('#langpair').val(lastSaved['langpair']);
 		}
 		// Default true
-		if (lastSaved.unknown == 'false') {
+		if (lastSaved['unknown'] == 'false') {
 			jQuery('#unknown').attr('checked', false);
 		} else {
 			jQuery('#unknown').attr('checked', true);
@@ -432,10 +433,9 @@ function getLocalStorage(db) {
         for (var item in numeric_array.reverse()){
                 //Limit size of string
 	
-		if ( numeric_array[item].txt ) {
-			var txt2show = numeric_array[item].txt.substr(0, 25) + "...";
-			
-			var string = '<p class="histitem"><a href="#" class="select" id="select-'+numeric_array[item].id+'"><img src="style/images/select.png" alt="Select" title="Select" /></a><span class="txt"><a href="#" class="select" id="selecta-'+numeric_array[item].id+'">'+txt2show+'</a></span><a href="#history" class="remove" id="remove-'+numeric_array[item].id+'"><img class="remove" id="remove-'+numeric_array[item].id+'" src="style/images/remove.gif" alt="Remove" title="Remove" /></a></p>';
+		if ( numeric_array[item]['txt'] ) {
+			var txt2show = numeric_array[item]['txt'].substr(0, 25) + "...";
+			var string = '<p class="histitem"><a href="#" class="select" id="select-'+numeric_array[item]['id']+'"><img src="style/images/select.png" alt="Select" title="Select" /></a><span class="txt"><a href="#" class="select" id="selecta-'+numeric_array[item]['id']+'">'+txt2show+'</a></span><a href="#history" class="remove" id="remove-'+numeric_array[item]['id']+'"><img class="remove" id="remove-'+numeric_array[item]['id']+'" src="style/images/remove.gif" alt="Remove" title="Remove" /></a></p>';
 			jQuery('#historial .list').append(string);
 		}
         }
@@ -450,7 +450,7 @@ function getLocalStorageID(db) {
 		
 		var objkeys = [];
 		
-		for (var k in result_array) {
+		for (k in result_array) {
 			if (result_array.hasOwnProperty(k)) {
 				objkeys.push(k);
 			}
@@ -478,11 +478,11 @@ function getLocalStorageID(db) {
 			//Limit size of string
 			var objkey = objkeys[item];
 			if ( result_array[objkey].txt ) {
-				var txt2show = result_array[objkey].txt.substr(0, 25) + "...";
+				var txt2show = result_array[objkey]['txt'].substr(0, 25) + "...";
 			
-				var string = '<p class="histitem"><a href="#" class="select" id="select-'+result_array[objkey].id+'"><img src="style/images/select.png" alt="Select" title="Select" /></a>';
-				string+='<span class="txt"><a href="#" class="select" id="selecta-'+result_array[objkey].id+'">'+txt2show+'</a></span>';
-				string+='<a href="#history" class="remove" id="remove-'+result_array[objkey].id+'"><img class="remove" id="remove-'+result_array[objkey].id+'" src="style/images/remove.gif" alt="Remove" title="Remove" /></a></p>';
+				var string = '<p class="histitem"><a href="#" class="select" id="select-'+result_array[objkey]['id']+'"><img src="style/images/select.png" alt="Select" title="Select" /></a>';
+				string+='<span class="txt"><a href="#" class="select" id="selecta-'+result_array[objkey]['id']+'">'+txt2show+'</a></span>';
+				string+='<a href="#history" class="remove" id="remove-'+result_array[objkey]['id']+'"><img class="remove" id="remove-'+result_array[objkey]['id']+'" src="style/images/remove.gif" alt="Remove" title="Remove" /></a></p>';
 				jQuery('#historial .list').append(string);
 			}
 		}
@@ -561,7 +561,7 @@ function storeDoc(db, docSet) {
 	
 	if (storage == 'indexedDB') {
 		
-		if ( docSet.id ) {
+		if ( docSet['id'] ) {
 			
 			pouchdb = Pouch('idb://'+db, function(err, dbh) {
 			if (err) {
@@ -575,7 +575,7 @@ function storeDoc(db, docSet) {
 					
 					var objkeys = [];
 		
-					for (var k in result_array) {
+					for (k in result_array) {
 						if (result_array.hasOwnProperty(k)) {
 							objkeys.push(k);
 						}
@@ -589,7 +589,7 @@ function storeDoc(db, docSet) {
 					if (objkeys.length > 0) {
 						var lastkey =  objkeys[(objkeys.length -1)];
 						
-						if ( ( result_array[lastkey].txt == docSet.txt ) && ( result_array[lastkey].traduccio == docSet.traduccio )  ) {
+						if ( ( result_array[lastkey].txt == docSet['txt'] ) && ( result_array[lastkey].traduccio == docSet['traduccio'] )  ) {
 							// If exists don't save
 							go = false;
 						}
@@ -597,7 +597,7 @@ function storeDoc(db, docSet) {
 					
 					if (go) {
 						// Turn id to string is required
-						dbh.put({ _id: docSet.id.toString(), langpair: docSet.langpair, unknown: docSet.unknown, txt: docSet.txt, traduccio: docSet.traduccio }, function(err, response) {
+						dbh.put({ _id: docSet['id'].toString(), langpair: docSet['langpair'], unknown: docSet['unknown'], txt: docSet['txt'], traduccio: docSet['traduccio'] }, function(err, response) {
 						if (err) {
 							console.log(err);
 						}
@@ -617,7 +617,7 @@ function storeDoc(db, docSet) {
 	if (localStorage) {
 
 		// Let's play with object
-		if ( docSet.id ) {
+		if ( docSet['id'] ) {
 
 			//get all values
 			numeric_array = getAllItems(db);
@@ -627,7 +627,7 @@ function storeDoc(db, docSet) {
 			// Get last saved
 			if ( numeric_array.length > 0 ) {
 				lastSaved = numeric_array[(numeric_array.length -1)];
-				if ( ( lastSaved.txt == docSet.txt ) && ( lastSaved.traduccio == docSet.traduccio ) ) {
+				if ( ( lastSaved['txt'] == docSet['txt'] ) && ( lastSaved['traduccio'] == docSet['traduccio'] ) ) {
 					go = false;
 				}
 			}
@@ -635,9 +635,9 @@ function storeDoc(db, docSet) {
 			//We checked if the same as last one
 			if ( go ) {
 								
-				doc = docSet.id;
+				doc = docSet['id'];
 	
-				for (var key in docSet) {
+				for (key in docSet) {
 	
 					if (key != 'id') {
 	
@@ -649,7 +649,7 @@ function storeDoc(db, docSet) {
 				//TODO -> limit 25?
 				limitarray = 25;
 				while ( numeric_array.length > limitarray ) {
-					clearStorage(DBname, numeric_array[numeric_array.length -1].id);
+					clearStorage(DBname, numeric_array[numeric_array.length -1]['id']);
 					numeric_array.pop();
 				}
 				
@@ -680,11 +680,11 @@ function getAllItems(db, docSet) {
 					var base = splitkey[1];
 					var attr = splitkey[2];
 
-					if (docSet === null) {
+					if (docSet == null) {
 						// Two dimensions
 						if (!localSaved[base]) {
 							localSaved[base] = [];
-							localSaved[base].id = base;
+							localSaved[base]['id'] = base;
 						}
 						localSaved[base][attr] = localStorage.getItem(key);
 					
@@ -693,7 +693,7 @@ function getAllItems(db, docSet) {
 						if ( base === docSet ) {
 							// One dimension
 							localSaved[attr] = localStorage.getItem(key);
-							localSaved.id = base;
+							localSaved['id'] = base;
 						}
 						
 					}
@@ -702,7 +702,7 @@ function getAllItems(db, docSet) {
 		}
 	}
 	
-	if (docSet === null) {
+	if (docSet == null) {
 		//Now sort array
 		for (var item in sortObj(localSaved)){
 			numeric_array.push( localSaved[item] );
@@ -724,7 +724,7 @@ function getAllItemsID(callback, db, docSet) {
 			console.log(err);
 		}
 		else {
-			if (docSet === null ) {
+			if (docSet == null ) {
 				dbh.allDocs(function(err, response) {
 					if (err) {
 						console.log(err);
@@ -733,13 +733,35 @@ function getAllItemsID(callback, db, docSet) {
 						var IDSaved = {};
 						
 						//If empty, start, return
-						if (response.rows.length === 0) {
+						if (response['rows'].length === 0) {
 							callback(IDSaved);
 						}
 						
-						for (var row in response.rows) {
-							// We handle row parsing in function below
-							dbh.get(response.rows[row].id, responseRows(err, docArr, IDSaved));
+						for (var row in response['rows']) {
+							dbh.get(response['rows'][row]['id'], function(err, docArr) {
+								if (err) {
+									console.log(err);
+								}
+								else {
+									var docid = docArr["_id"];
+									
+									if (! IDSaved[docid]) {
+										IDSaved[docid] = {};
+									}
+									
+									IDSaved[docid].id = docid;
+									for (var attr in docArr) {
+										if (attr.indexOf("_") !== 0) {
+											IDSaved[docid][attr] = docArr[attr];
+										}
+									}
+									
+									if (Object.keys(IDSaved).length >= response['total_rows']) {
+										
+										callback(IDSaved);
+									}
+								}
+							});
 						}
 					}
 				});
@@ -751,7 +773,7 @@ function getAllItemsID(callback, db, docSet) {
 					}
 					else {
 						var IDSaved = {};
-						IDSaved.id = docSet;
+						IDSaved['id'] = docSet;
 						for (var attr in docArr) {
 							if (attr.indexOf("_") !== 0) {
 								IDSaved[attr] = docArr[attr];
@@ -763,32 +785,6 @@ function getAllItemsID(callback, db, docSet) {
 			}
 		}
 		});	
-	}
-}
-
-function responseRows(err, docArr, IDSaved) {
-
-	if (err) {
-		console.log(err);
-	}
-	else {
-		var docid = docArr._id;
-		
-		if (! IDSaved[docid]) {
-			IDSaved[docid] = {};
-		}
-		
-		IDSaved[docid].id = docid;
-		for (var attr in docArr) {
-			if (attr.indexOf("_") !== 0) {
-				IDSaved[docid][attr] = docArr[attr];
-			}
-		}
-		
-		if (Object.keys(IDSaved).length >= response.total_rows) {
-			
-			callback(IDSaved);
-		}
 	}
 }
 
@@ -873,11 +869,11 @@ window.addEventListener('localized', function() {
 }, false);
 
 $(window).load(function() {
-	
+
 	// If no Firefox, for now, don't even show install button
 	if(navigator.userAgent.toLowerCase().indexOf('firefox') < 0) {
 		$('#install').hide();
-		AddGoogleAd();
+	AddGoogleAd();
 	} else {
 		RemoveGoogleAd();
 	}
@@ -933,32 +929,27 @@ function parells_l10n() {
 }
 
 $.fn.sort_select_box = function(){
-    // Get options from select box
-    var my_options = $("#" + this.attr('id') + ' option');
-    // sort alphabetically
-    my_options.sort(function(a,b) {
-        if (a.text > b.text) return 1;
-        else if (a.text < b.text) return -1;
-        else return 0;
-    });
-   //replace with sorted my_options;
-   $(this).empty().append( my_options );
-
-   // clearing any selections
-   $("#"+this.attr('id')+" option").attr('selected', false);
+	// Get options from select box
+	var my_options = $("#" + this.attr('id') + ' option');
+	// sort alphabetically
+	my_options.sort(function(a,b) {
+		if (a.text > b.text) return 1;
+		else if (a.text < b.text) return -1;
+		else return 0;
+	});
+	
+	//replace with sorted my_options;
+	$(this).empty().append( my_options );
+	
+	// clearing any selections
+	$("#"+this.attr('id')+" option").attr('selected', false);
 };
 
 
-
-
 function install(){
-
-	if (!window.location.origin) {
-		window.location.origin = window.location.protocol+"//"+window.location.host;
-	}
-	navigator.mozApps.install(window.location.origin+"/manifest.webapp");
-	checkupdate();
-	return false;
+navigator.mozApps.install("http://traductor.softcatala.org/manifest.webapp");
+checkupdate();
+return false;
 }
 document.getElementById("install").onsubmit = install;
 
@@ -987,38 +978,38 @@ function checkupdate() {
 	};
 	request.onsuccess = function(e) {
 		
-	if (request.result.length === 1) {
-		
-		$("#install").hide(); // No need to show install
-		$("#ad").hide(); // Remove ad in installed app
-		
-		var appsRecord = request.result;
-		var installedVersion = appsRecord[0].manifest.version;
-		var manifestURL = appsRecord[0].manifestURL;
-		$.getJSON(manifestURL, function(data) {
-			if (data.version != installedVersion ) {
-				//console.log(data.version);
-				//console.log(installedVersion);
-				//var update = '<button id="update-btn" data-l10n-id="update">Update available</button>';
-				//$("#warninternet").append(update);
-				//$("#warninternet").show();
-				var appCache = window.applicationCache;
-				console.log("Updating app");
-				console.log("Installed "+installedVersion+"; Available "+data.version);
-				
-				//appCache.update(); // Attempt to update the user's cache.
-				//if (appCache.status == window.applicationCache.UPDATEREADY) {
-				//	console.log("Now forcing update");
-				//	appCache.swapCache();  // The fetch was successful, swap in the new cache.
-				//}
-				appsRecord[0].checkForUpdate(); // Update
-								
-			} 
-		});
-
-		RemoveGoogleAd();
-
-	} else { AddGoogleAd(); }
+		if (request.result.length === 1) {
+			
+			$("#install").hide(); // No need to show install
+			$("#ad").hide(); // Remove ad in installed app
+			
+			var appsRecord = request.result;
+			var installedVersion = appsRecord[0].manifest.version;
+			var manifestURL = appsRecord[0].manifestURL;
+			$.getJSON(manifestURL, function(data) {
+				if (data.version != installedVersion ) {
+					//console.log(data.version);
+					//console.log(installedVersion);
+					//var update = '<button id="update-btn" data-l10n-id="update">Update available</button>';
+					//$("#warninternet").append(update);
+					//$("#warninternet").show();
+					var appCache = window.applicationCache;
+					console.log("Updating app");
+					console.log("Installed "+installedVersion+"; Available "+data.version);
+					
+					//appCache.update(); // Attempt to update the user's cache.
+					//if (appCache.status == window.applicationCache.UPDATEREADY) {
+					//	console.log("Now forcing update");
+					//	appCache.swapCache();  // The fetch was successful, swap in the new cache.
+					//}
+					appsRecord[0].checkForUpdate(); // Update
+									
+				} 
+			});
+	
+			RemoveGoogleAd();
+	
+		} else { AddGoogleAd(); }
 	};
 	
 }
