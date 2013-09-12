@@ -948,9 +948,9 @@ $.fn.sort_select_box = function(){
 
 
 function install(){
-navigator.mozApps.install("http://traductor.softcatala.org/manifest.webapp");
-checkupdate();
-return false;
+	navigator.mozApps.install("http://traductor.softcatala.org/manifest.webapp");
+	checkupdate();
+	return false;
 }
 document.getElementById("install").onsubmit = install;
 
@@ -970,48 +970,56 @@ document.getElementById("install").onsubmit = install;
 
 
 function checkupdate() {
-	var request = window.navigator.mozApps.getInstalled();
-
-	request.onerror = function(e) {
-		console.error("Error calling getInstalled: " + request.error.name);
-		$("#install").hide();
-		AddGoogleAd();
-	};
-	request.onsuccess = function(e) {
+	
+	// Detect Mozilla
+	if ( window.navigator.mozApps ) {
+	
+		var request = window.navigator.mozApps.getInstalled();
+	
+		request.onerror = function(e) {
+			console.error("Error calling getInstalled: " + request.error.name);
+			$("#install").hide();
+			AddGoogleAd();
+		};
+		request.onsuccess = function(e) {
+			
+			if (request.result.length === 1) {
+				
+				$("#install").hide(); // No need to show install
+				$("#ad").hide(); // Remove ad in installed app
+				
+				var appsRecord = request.result;
+				var installedVersion = appsRecord[0].manifest.version;
+				var manifestURL = appsRecord[0].manifestURL;
+				$.getJSON(manifestURL, function(data) {
+					if (data.version != installedVersion ) {
+						//console.log(data.version);
+						//console.log(installedVersion);
+						//var update = '<button id="update-btn" data-l10n-id="update">Update available</button>';
+						//$("#warninternet").append(update);
+						//$("#warninternet").show();
+						var appCache = window.applicationCache;
+						console.log("Updating app");
+						console.log("Installed "+installedVersion+"; Available "+data.version);
+						
+						//appCache.update(); // Attempt to update the user's cache.
+						//if (appCache.status == window.applicationCache.UPDATEREADY) {
+						//	console.log("Now forcing update");
+						//	appCache.swapCache();  // The fetch was successful, swap in the new cache.
+						//}
+						appsRecord[0].checkForUpdate(); // Update
+										
+					} 
+				});
 		
-		if (request.result.length === 1) {
-			
-			$("#install").hide(); // No need to show install
-			$("#ad").hide(); // Remove ad in installed app
-			
-			var appsRecord = request.result;
-			var installedVersion = appsRecord[0].manifest.version;
-			var manifestURL = appsRecord[0].manifestURL;
-			$.getJSON(manifestURL, function(data) {
-				if (data.version != installedVersion ) {
-					//console.log(data.version);
-					//console.log(installedVersion);
-					//var update = '<button id="update-btn" data-l10n-id="update">Update available</button>';
-					//$("#warninternet").append(update);
-					//$("#warninternet").show();
-					var appCache = window.applicationCache;
-					console.log("Updating app");
-					console.log("Installed "+installedVersion+"; Available "+data.version);
-					
-					//appCache.update(); // Attempt to update the user's cache.
-					//if (appCache.status == window.applicationCache.UPDATEREADY) {
-					//	console.log("Now forcing update");
-					//	appCache.swapCache();  // The fetch was successful, swap in the new cache.
-					//}
-					appsRecord[0].checkForUpdate(); // Update
-									
-				} 
-			});
-	
-			RemoveGoogleAd();
-	
-		} else { AddGoogleAd(); }
-	};
+				RemoveGoogleAd();
+		
+			} else { AddGoogleAd(); }
+		};
+	} else {
+		// Add ad
+		AddGoogleAd();
+	}
 	
 }
 
