@@ -450,7 +450,7 @@ function getLocalStorageID(db) {
 		
 		var objkeys = [];
 		
-		for (k in result_array) {
+		for (var k in result_array) {
 			if (result_array.hasOwnProperty(k)) {
 				objkeys.push(k);
 			}
@@ -575,7 +575,7 @@ function storeDoc(db, docSet) {
 					
 					var objkeys = [];
 		
-					for (k in result_array) {
+					for (var k in result_array) {
 						if (result_array.hasOwnProperty(k)) {
 							objkeys.push(k);
 						}
@@ -637,7 +637,7 @@ function storeDoc(db, docSet) {
 								
 				doc = docSet['id'];
 	
-				for (key in docSet) {
+				for (var key in docSet) {
 	
 					if (key != 'id') {
 	
@@ -787,6 +787,7 @@ function getAllItemsID(callback, db, docSet) {
 		});	
 	}
 }
+
 
 function migrateStorage(db) {
 	
