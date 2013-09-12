@@ -505,7 +505,7 @@ function clearStorage(db, doc) {
 			var splitkey = key.split('-', 3);
 			var prefix = splitkey[0];
 			var base = splitkey[1];
-			if (doc !== null ) {
+			if ( doc ) {
 				if ((prefix == db) && (base == doc)) { //Only remove if prefix
 					toRemove.push(key);
 				}
@@ -529,7 +529,7 @@ function clearStorageID(db, doc) {
 	
 	if (storage == 'indexedDB') {
 	
-		if (doc !== null) {
+		if (doc) {
 			
 			pouchdb = Pouch('idb://'+db, function(err, dbh) {
 			if (err) {
@@ -680,7 +680,7 @@ function getAllItems(db, docSet) {
 					var base = splitkey[1];
 					var attr = splitkey[2];
 
-					if (docSet == null) {
+					if ( ! docSet ) {
 						// Two dimensions
 						if (!localSaved[base]) {
 							localSaved[base] = [];
@@ -702,7 +702,7 @@ function getAllItems(db, docSet) {
 		}
 	}
 	
-	if (docSet == null) {
+	if ( ! docSet ) {
 		//Now sort array
 		for (var item in sortObj(localSaved)){
 			numeric_array.push( localSaved[item] );
@@ -724,7 +724,7 @@ function getAllItemsID(callback, db, docSet) {
 			console.log(err);
 		}
 		else {
-			if (docSet == null ) {
+			if (! docSet ) {
 				dbh.allDocs(function(err, response) {
 					if (err) {
 						console.log(err);
