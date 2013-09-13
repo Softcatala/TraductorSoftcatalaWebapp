@@ -738,30 +738,8 @@ function getAllItemsID(callback, db, docSet) {
 						}
 						
 						for (var row in response['rows']) {
-							dbh.get(response['rows'][row]['id'], function(err, docArr) {
-								if (err) {
-									console.log(err);
-								}
-								else {
-									var docid = docArr["_id"];
-									
-									if (! IDSaved[docid]) {
-										IDSaved[docid] = {};
-									}
-									
-									IDSaved[docid].id = docid;
-									for (var attr in docArr) {
-										if (attr.indexOf("_") !== 0) {
-											IDSaved[docid][attr] = docArr[attr];
-										}
-									}
-									
-									if (Object.keys(IDSaved).length >= response['total_rows']) {
-										
-										callback(IDSaved);
-									}
-								}
-							});
+							
+							responseRows( dbh, response, row, callback, IDSaved );
 						}
 					}
 				});
@@ -786,6 +764,37 @@ function getAllItemsID(callback, db, docSet) {
 		}
 		});	
 	}
+}
+
+function responseRows( dbh, response, row, callback, IDSaved ) {
+
+	dbh.get(response['rows'][row]['id'], function(err, docArr) {
+		
+		if (err) {
+			console.log(err);
+		}
+		else {
+			var docid = docArr._id;
+			
+			if (! IDSaved[docid]) {
+				IDSaved[docid] = {};
+			}
+			
+			IDSaved[docid].id = docid;
+			for (var attr in docArr) {
+				if (attr.indexOf("_") !== 0) {
+					IDSaved[docid][attr] = docArr[attr];
+				}
+			}
+			
+			if (Object.keys(IDSaved).length >= response.total_rows) {
+			
+				callback(IDSaved);
+			}
+		}
+	});
+
+
 }
 
 
