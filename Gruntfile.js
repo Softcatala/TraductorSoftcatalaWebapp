@@ -84,7 +84,9 @@ module.exports = function(grunt) {
 					'js/libs/*js',
 					'style/*.css',
 					'style/images/*',
-					'l10n/*'
+					'l10n/*',
+					'img/icons/*',
+					'img/*.*'
 				],
 				dest: 'out/manifest.appcache'
 			}
@@ -97,7 +99,7 @@ module.exports = function(grunt) {
 				expand: true, cwd: 'build/', src: ['**'], dest: site
 			},
 			extra: {
-				expand: true, cwd: 'src/', src: ['js/libs/jquery-1.9.1.min.js', 'js/libs/html5shiv.js', 'favicon.ico', 'l10n/*', 'style/**'], dest: 'out'
+				expand: true, cwd: 'src/', src: ['js/libs/jquery-1.9.1.min.js', 'js/libs/html5shiv.js', 'favicon.ico', 'l10n/*', 'style/**', 'img/**'], dest: 'out'
 			},	
 			prod: {
 				expand: true, cwd: 'out/', src: ['**'], dest: site				
