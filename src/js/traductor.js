@@ -957,7 +957,8 @@ $.fn.sort_select_box = function(){
 
 
 function install(){
-	navigator.mozApps.install("http://traductor.softcatala.org/manifest.webapp");
+	var location = window.location.origin;
+	navigator.mozApps.install(location+"/manifest.webapp");
 	checkupdate();
 	return false;
 }
