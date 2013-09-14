@@ -1,10 +1,26 @@
 module.exports = function(grunt) {
 
 	var site = grunt.option('site') || '/var/www/dev-traductor/htdocs';
-	console.log(site);
+	var version = grunt.option('version') || "0.2.8.4";
+	console.log("HTDOCS: "+site);
+	console.log("VERSION: "+version);
+
 	
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		replace: {
+			prod: {
+				options: {
+					variables: {
+						'version': version
+					},
+					prefix: '@@'
+				},
+				files: [
+					{ expand: true, flatten: true, src: ['manifest.webapp'], dest: 'out/' }
+				]
+			}
+		},
 		concat: {
 			options: {
 				separator: ';'
@@ -92,6 +108,7 @@ module.exports = function(grunt) {
                         prod: ['out'],
                         all: ['build', 'out']
                 }
+		
 	});
 	
 	// Load the plugin that provides the "uglify" task.
@@ -102,10 +119,11 @@ module.exports = function(grunt) {
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-manifest');
         grunt.loadNpmTasks('grunt-contrib-clean');
-
+	grunt.loadNpmTasks('grunt-replace');
+	
 	grunt.registerTask('dev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev']);
 	grunt.registerTask('default', 'dev');
-	grunt.registerTask('prod', ['jshint', 'clean:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest']);
+	grunt.registerTask('prod', ['jshint', 'clean:prod', 'replace:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest']);
 	grunt.registerTask('sitedev', ['dev', 'copy:sitedev']);
 	grunt.registerTask('siteprod', ['prod', 'copy:prod']);
         grunt.registerTask('clear', ['clean:all']);
