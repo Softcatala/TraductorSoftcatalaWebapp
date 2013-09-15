@@ -2,6 +2,7 @@
 
 // Storage detection
 
+var appdomain = window.location.origin;
 var DBname = "trada";
 var storage = null;
 var apertium_url = "http://www.softcatala.org/apertium";
@@ -89,16 +90,7 @@ function nl2br(text){
 	return unescape(text.replace(/(%5Cr%5Cn)|(%5Cn%5Cr)|%0A|%5Cr|%5Cn/g,'<br />'));
 }
 
-setTimeout(avisSoftvalencia,10000);
 document.apertium_loaded = false;
-
-function avisSoftvalencia() {
-
-	avis = 'Estem experimentant problemes tècnics.<br />Proveu d\'utilitzar <a href="http://www.softvalencia.org/traductor/">el traductor disponible a la web de Softvalencià</a> mentre els resolem.';
-
-	// if(!document.apertium_loaded)
-		jQuery('#avis_softvalencia').html(avis);
-}
 
 jQuery(document).ready(function() {
 	// document.apertium_loaded = true;
@@ -957,8 +949,7 @@ $.fn.sort_select_box = function(){
 
 
 function install(){
-	var location = window.location.origin;
-	navigator.mozApps.install(location+"/manifest.webapp");
+	navigator.mozApps.install(appdomain+"/manifest.webapp");
 	checkupdate();
 	return false;
 }
