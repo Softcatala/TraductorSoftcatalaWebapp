@@ -12,6 +12,7 @@
     "name": "Softcatalà",
     "url": "http://traductor.softcatala.org"
   },
+  "launch_path": "/index.html",
   "installs_allowed_from": ["*"],
   "appcache_path": "/manifest.appcache",
   "locales": {
