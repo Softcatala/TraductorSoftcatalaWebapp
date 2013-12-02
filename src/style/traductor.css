@@ -3,7 +3,7 @@ html, body {
 }
 
 body {
-    font-family: 'MozTTLight', Verdana, sans-serif; padding: 0; margin: 0;
+    font-family: 'MozTTLight', Verdana, sans-serif; padding: 0; margin: 0; background-color: #ffffff;
 }
 
 img { border: none; }
