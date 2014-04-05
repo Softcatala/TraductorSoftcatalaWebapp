@@ -28,7 +28,7 @@ module.exports = function(grunt) {
 					prefix: '@@'
 				},
 				files: [
-					{ expand: true, flatten: true, src: ['manifest.json'], dest: 'crx_build/' }
+					{ expand: true, flatten: true, src: ['manifest.json'], dest: 'out/' }
 				]
 			}
 		},
@@ -113,25 +113,35 @@ module.exports = function(grunt) {
 				expand: true, cwd: 'src/', src: ['js/libs/jquery-1.9.1.min.js', 'js/libs/html5shiv.js', 'favicon.ico', 'l10n/*', 'style/**', 'img/**'], dest: 'out'
 			},	
 			prod: {
-				expand: true, cwd: 'out/', src: ['**'], dest: site				
+				expand: true, cwd: 'out/', src: ['**'], dest: site
 			}
 		},
 		clean: {
 				dev: ['build'],
 				prod: ['out'],
-				crx: ['crx_build', 'crx_out'],
-				all: ['build', 'out', 'crx_build', 'crx_out'],
+				all: ['build', 'out'],
 		},
 		crx: {
 			hostedPackage: {
-				"src": "crx_build/",
-				"dest": "crx_out/softcatala.crx",
+				"src": "out/",
+				"dest": "softcatala.crx",
 				"baseURL": "http://traductor.softcatala.org/",
 				"exclude": [ ".git", ".svn" ],
 				"privateKey": "~/.ssh/softcatala.pem",
 				"options": {
 					"maxBuffer": 3000 * 1024 //build extension with a weight up to 3MB
 				}
+			}
+		},
+		compress: {
+			zip: {
+				options: {
+					archive: './softcatala.zip',
+					mode: 'zip'
+				},
+				files: [
+					{ expand: true, cwd: 'out/', src: ['**'] }
+				]
 			}
 		}	
 	});
@@ -146,6 +156,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-replace');
 	grunt.loadNpmTasks('grunt-crx');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	
 	grunt.registerTask('dev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev']);
 	grunt.registerTask('default', 'dev');
@@ -155,6 +166,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('clear', ['clean:all']);
 
 	grunt.registerTask('check', ['jshint']);
-	grunt.registerTask('crxbuild', ['jshint', 'clean:crx', 'replace:crx', 'crx:hostedPackage'] );
-
+	grunt.registerTask('crxbuild', ['jshint', 'clean:prod', 'replace:crx', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest', 'crx:hostedPackage'] );
+	grunt.registerTask('zip', ['jshint', 'clean:prod', 'replace:crx', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest', 'compress:zip'] );
 };
