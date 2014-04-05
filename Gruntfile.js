@@ -19,6 +19,17 @@ module.exports = function(grunt) {
 				files: [
 					{ expand: true, flatten: true, src: ['manifest.webapp'], dest: 'out/' }
 				]
+			},
+			crx: {
+				options: {
+					variables: {
+						'version': version
+					},
+					prefix: '@@'
+				},
+				files: [
+					{ expand: true, flatten: true, src: ['manifest.json'], dest: 'crx_build/' }
+				]
 			}
 		},
 		concat: {
@@ -105,12 +116,24 @@ module.exports = function(grunt) {
 				expand: true, cwd: 'out/', src: ['**'], dest: site				
 			}
 		},
-                clean: {
-                        dev: ['build'],
-                        prod: ['out'],
-                        all: ['build', 'out']
-                }
-		
+		clean: {
+				dev: ['build'],
+				prod: ['out'],
+				crx: ['crx_build', 'crx_out'],
+				all: ['build', 'out', 'crx_build', 'crx_out'],
+		},
+		crx: {
+			hostedPackage: {
+				"src": "crx_build/",
+				"dest": "crx_out/softcatala.crx",
+				"baseURL": "http://traductor.softcatala.org/",
+				"exclude": [ ".git", ".svn" ],
+				"privateKey": "~/.ssh/softcatala.pem",
+				"options": {
+					"maxBuffer": 3000 * 1024 //build extension with a weight up to 3MB
+				}
+			}
+		}	
 	});
 	
 	// Load the plugin that provides the "uglify" task.
@@ -118,18 +141,20 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-targethtml');
-        grunt.loadNpmTasks('grunt-contrib-copy');
-        grunt.loadNpmTasks('grunt-manifest');
-        grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-manifest');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-replace');
+	grunt.loadNpmTasks('grunt-crx');
 	
 	grunt.registerTask('dev', ['jshint', 'clean:dev', 'copy:dev', 'targethtml:dev']);
 	grunt.registerTask('default', 'dev');
 	grunt.registerTask('prod', ['jshint', 'clean:prod', 'replace:prod', 'concat:prod', 'uglify:prod', 'targethtml:prod', 'copy:extra', 'manifest']);
 	grunt.registerTask('sitedev', ['dev', 'copy:sitedev']);
 	grunt.registerTask('siteprod', ['prod', 'copy:prod']);
-        grunt.registerTask('clear', ['clean:all']);
+	grunt.registerTask('clear', ['clean:all']);
 
 	grunt.registerTask('check', ['jshint']);
+	grunt.registerTask('crxbuild', ['jshint', 'clean:crx', 'replace:crx', 'crx:hostedPackage'] );
 
 };

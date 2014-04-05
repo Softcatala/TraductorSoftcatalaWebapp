@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "version": "@@version",
+  "name": "Traductor",
+  "description": "Softcatalà's Translator webapp",
+  "app": {
+    "urls": [
+      "*://traductor.softcatala.org/"
+    ],
+    "launch": {
+      "web_url": "http://traductor.softcatala.org/"
+    }
+  },
+  "icons": {
+    "16": "/img/icons/softcatala-16.png",
+    "48": "/img/icons/softcatala-48.png",
+    "128": "/img/icons/softcatala-128.png"
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "notifications"
+  ]
+}
