@@ -134,7 +134,7 @@ jQuery(document).ready(function() {
 					crossDomain: "true",
 					timeout:2000,
 					async:true,
-					data : {'langpair':langpair,'q':txt,'markUnknown':muk,'key': api_key, callback:'trans'},
+					data : {'langpair':langpair,'q':txt,'markUnknown':muk,'key': api_key },
 					dataType: 'jsonp',
 					success : trad_ok,
 					failure : trad_ko
