@@ -10,7 +10,7 @@
   },
   "developer": {
     "name": "Softcatalà",
-    "url": "http://traductor.softcatala.org"
+    "url": "https://traductor.softcatala.org"
   },
   "launch_path": "/index.html",
   "installs_allowed_from": ["*"],
@@ -19,19 +19,19 @@
    "en": {
       "description": "Softcatalà's Translator webapp",
       "developer": {
-        "url": "http://traductor.softcatala.org"
+        "url": "https://traductor.softcatala.org"
       }
     },
     "es": {
       "description": "Aplicación web del traductor de Softcatalà",
       "developer": {
-        "url": "http://traductor.softcatala.org"
+        "url": "https://traductor.softcatala.org"
       }
     },
     "ca": {
       "description": "Aplicació web del traductor de Softcatalà",
       "developer": {
-        "url": "http://traductor.softcatala.org"
+        "url": "https://traductor.softcatala.org"
       }
     }
   },
