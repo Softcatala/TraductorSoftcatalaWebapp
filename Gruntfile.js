@@ -125,7 +125,7 @@ module.exports = function(grunt) {
 			hostedPackage: {
 				"src": "out/",
 				"dest": "softcatala.crx",
-				"baseURL": "http://traductor.softcatala.org/",
+				"baseURL": "https://traductor.softcatala.org/",
 				"exclude": [ ".git", ".svn" ],
 				"privateKey": "~/.ssh/softcatala.pem",
 				"options": {

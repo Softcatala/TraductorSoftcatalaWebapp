@@ -5,7 +5,7 @@
 var appdomain = window.location.origin;
 var DBname = "trada";
 var storage = null;
-var apertium_url = "http://www.softcatala.org/apertium";
+var apertium_url = "https://www.softcatala.org/apertium";
 //apertium_url = "http://api.apertium.org"
 var sc_key = 'ZjI4NjFkYzZmOWU1NTdkOWUyOWE';
 var apertium_key = '171Fr02FAPIe7NxKxQMGigu7oU4';
@@ -119,7 +119,7 @@ jQuery(document).ready(function() {
 		
 		// Let's clear translated text
 
-		var checkurl = "http://www.softcatala.org/app/online.php";
+		var checkurl = "https://www.softcatala.org/app/online.php";
 		$.ajax({
 			url:checkurl,
 			type:"GET",
@@ -949,7 +949,7 @@ $.fn.sort_select_box = function(){
 
 
 function install(){
-	navigator.mozApps.install("http://traductor.softcatala.org/manifest.webapp");
+	navigator.mozApps.install("https://traductor.softcatala.org/manifest.webapp");
 	checkupdate();
 	return false;
 }
