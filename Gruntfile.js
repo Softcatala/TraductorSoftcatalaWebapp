@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
 	var site = grunt.option('site') || '/var/www/dev-traductor/htdocs';
-	var version = grunt.option('ver') || "0.3.0.1";
+	var version = grunt.option('ver') || "0.3.1.0";
 	console.log("HTDOCS: "+site);
 	console.log("VERSION: "+version);
 
